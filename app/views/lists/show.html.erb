@@ -1,0 +1,13 @@
+<h1><%= @list.name %></h1>
+<div>
+  <%= link_to 'add a movie', new_list_bookmark_path(@list), class: 'btn btn-flat' %>
+</div>
+<div><%= link_to "back", :back %></div>
+<div><% @list.movies.each do |movie| %>
+  <% bookmark = Bookmark.find_by(list: @list, movie: movie) %>
+  <%= bookmark.comment %>
+  <p><%= movie.title %></p>
+  <div><%= image_tag movie.poster_url, size: "200" %></div>
+  <div><%= link_to 'delete', bookmark_path(bookmark), method: :delete %></div>
+  <% end %>
+</div>
